@@ -53,7 +53,7 @@ var globalController = (function(budgetCtrl, UICtrl){
     // 1. get the field input data
     var input = UICtrl.getInput();
     console.log(input);
-    // 2. add dthe item to the budget controller.
+    // 2. add the item to the budget controller.
 
     // 3. Add the item to the UI
 
@@ -71,3 +71,5 @@ var globalController = (function(budgetCtrl, UICtrl){
   }
 
 })(budgetController, UIController)
+
+globalController.init();
