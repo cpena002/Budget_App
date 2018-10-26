@@ -32,7 +32,6 @@ var budgetController = (function(){
       var newItem, ID;
       //Create new ID to assign to income/expenses
 
-        // the second set of brackets is to get the last avaialble position of the array.
       if (data.allItems[type].length > 0){
         ID = data.allItems[type][data.allItems[type].length - 1].id + 1;
       } else {
@@ -109,7 +108,6 @@ var globalController = (function(budgetCtrl, UICtrl){
     var input, newItem;
     // 1. get the field input data
     input = UICtrl.getInput();
-    console.log(input);
     // 2. add the item to the budget controller.
     newItem = budgetCtrl.addItem(input.type, input.description, input.value);
     // 3. Add the item to the UI
