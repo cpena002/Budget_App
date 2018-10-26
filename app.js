@@ -2,6 +2,31 @@
 var budgetController = (function(){
   // functions included in the object returned by this module are poublic and accessible to other modules.
 
+  //Expense function constructor.
+  var Expense = function(id, description, value){
+    this.id = id;
+    this.description = description;
+    this.value = value;
+  }
+
+  // Income function constructor.
+  var Income = function(id, description, value){
+    this.id = id;
+    this.description = description;
+    this.value = value;
+  }
+
+  var data = {
+    allItems: {
+      expenses: [],
+      incomes: []
+    },
+    totals: {
+      expenses: 0,
+      incomces: 0 
+    }
+  }
+
 })();
 
 // UI CONTROLLER
