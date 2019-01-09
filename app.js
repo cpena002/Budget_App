@@ -91,7 +91,7 @@ var UIController = (function(){
         html = '<div class="item clearfix" id="income-%id%"> <div class="item__description">%description%</div> <div class="right clearfix"> <div class="item__value">%value%</div> <div class="item__delete"> <button class="item__delete--btn"><i class="ion-ios-close-outline"></i></button> </div> </div> </div>'
       } else if (type === 'expense') {
         element = DOMStrings.expensesContainer;
-        html = '<div class="item clearfix" id="expense-%id%"> <div class="item__description">%description%</div> <div class="right clearfix"> <div class="item__value">- %value%</div> <div class="item__percentage">21%</div> <div class="item__delete"> <button class="item__delete--btn"><i class="ion-ios-close-outline"></i></button> </div> </div> </div>'
+        html = '<div class="item clearfix" id="expense-%id%"> <div class="item__description">%htm%</div> <div class="right clearfix"> <div class="item__value">- %value%</div> <div class="item__percentage">21%</div> <div class="item__delete"> <button class="item__delete--btn"><i class="ion-ios-close-outline"></i></button> </div> </div> </div>'
       }
       // Replace placeholder text with actual data.
       newHtml = html.replace('%id%', obj.id);
@@ -100,6 +100,12 @@ var UIController = (function(){
       // Insert HTML into the DOM.
       document.querySelector(element).insertAdjacentHTML('beforeend', newHtml);
 
+    },
+
+    clearFields: function() {
+      var fields, fieldsArray;
+      fields = document.querySelectorAll(DOMStrings.inputDescription + ', ' + DOMStrings.inputValue);
+      fieldsArray = Array.prototype.call(fields);
     },
 
     getDOMStrings: function (){
