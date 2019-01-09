@@ -148,7 +148,6 @@ var globalController = (function(budgetCtrl, UICtrl){
     newItem = budgetCtrl.addItem(input.type, input.description, input.value);
     // 3. Add the item to the UI
     UICtrl.addListItem(newItem, input.type);
-
     // 4. Clear the fields.
     UICtrl.clearFields();
     // 5. Calculate the budget.
