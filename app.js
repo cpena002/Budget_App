@@ -91,7 +91,7 @@ var UIController = (function(){
         html = '<div class="item clearfix" id="income-%id%"> <div class="item__description">%description%</div> <div class="right clearfix"> <div class="item__value">%value%</div> <div class="item__delete"> <button class="item__delete--btn"><i class="ion-ios-close-outline"></i></button> </div> </div> </div>'
       } else if (type === 'expense') {
         element = DOMStrings.expensesContainer;
-        html = '<div class="item clearfix" id="expense-%id%"> <div class="item__description">%htm%</div> <div class="right clearfix"> <div class="item__value">- %value%</div> <div class="item__percentage">21%</div> <div class="item__delete"> <button class="item__delete--btn"><i class="ion-ios-close-outline"></i></button> </div> </div> </div>'
+        html = '<div class="item clearfix" id="expense-%id%"> <div class="item__description">%description%</div> <div class="right clearfix"> <div class="item__value">- %value%</div> <div class="item__percentage">21%</div> <div class="item__delete"> <button class="item__delete--btn"><i class="ion-ios-close-outline"></i></button> </div> </div> </div>'
       }
       // Replace placeholder text with actual data.
       newHtml = html.replace('%id%', obj.id);
@@ -107,11 +107,13 @@ var UIController = (function(){
 
       fields = document.querySelectorAll(DOMStrings.inputDescription + ', ' + DOMStrings.inputValue);
 
-      fieldsArray = Array.prototype.call(fields);
+      fieldsArray = Array.prototype.slice.call(fields);
 
       fieldsArray.forEach(function(current, index, array){
         current.value = "";
       });
+
+      fieldsArray[0].focus();
 
     },
 
@@ -146,9 +148,12 @@ var globalController = (function(budgetCtrl, UICtrl){
     newItem = budgetCtrl.addItem(input.type, input.description, input.value);
     // 3. Add the item to the UI
     UICtrl.addListItem(newItem, input.type);
-    // 4. Calculate the budget.
 
-    // 5. Display the budget on the UI
+    // 4. Clear the fields.
+    UICtrl.clearFields();
+    // 5. Calculate the budget.
+
+    // 6. Display the budget on the UI
 
   };
 
