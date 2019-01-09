@@ -79,7 +79,7 @@ var UIController = (function(){
         /* We could have stored the values in a varialbes, but in order to return 3 values within the same object is easier to have the object return another object (the one we're in) */
         type: document.querySelector(DOMStrings.inputType).value, // Will either be inc or exp
         description: document.querySelector(DOMStrings.inputDescription).value,
-        value: document.querySelector(DOMStrings.inputValue).value
+        value: parseFloat(document.querySelector(DOMStrings.inputValue).value)
       }
     },
 
