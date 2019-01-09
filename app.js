@@ -152,14 +152,17 @@ var globalController = (function(budgetCtrl, UICtrl){
     var input, newItem;
     // 1. get the field input data
     input = UICtrl.getInput();
-    // 2. add the item to the budget controller.
-    newItem = budgetCtrl.addItem(input.type, input.description, input.value);
-    // 3. Add the item to the UI
-    UICtrl.addListItem(newItem, input.type);
-    // 4. Clear the fields.
-    UICtrl.clearFields();
-    // 5. Calculate and update budget.
-    updateBudget();
+
+    if(input.description !== "" && !isNaN(input.value) && input.value > 0){
+      // 2. add the item to the budget controller.
+      newItem = budgetCtrl.addItem(input.type, input.description, input.value);
+      // 3. Add the item to the UI
+      UICtrl.addListItem(newItem, input.type);
+      // 4. Clear the fields.
+      UICtrl.clearFields();
+      // 5. Calculate and update budget.
+      updateBudget();
+    }
 
   };
 
