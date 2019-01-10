@@ -1,7 +1,5 @@
 // BUDGET CONTROLLER
 var budgetController = (function(){
-  // functions included in the object returned by this module are poublic and accessible to other modules.
-
   //Expense function constructor.
   var Expense = function(id, description, value){
     this.id = id;
@@ -22,21 +20,24 @@ var budgetController = (function(){
       sum = sum + current.value;
     });
     data.totals[type] = sum;
-  }
+    console.log(type);
+  };
 
+  // Our data structure. Will hold the data related to our budget, such as income and expenses objects, totals of incomes and expense, budget grand total, and percentage of income spent.
   var data = {
     allItems: {
       expense: [],
       income: []
     },
     totals: {
-      expenses: 0,
-      incomes: 0
+      expense: 0,
+      income: 0
     },
-    budget:0,
+    budget: 0,
     percentage: -1
   };
 
+  // functions included in the object returned by this module are poublic and accessible to other modules.
   return {
     addItem: function(type, des, val){
       var newItem, ID;
@@ -68,9 +69,18 @@ var budgetController = (function(){
         calculateTotal('expense');
         calculateTotal('income');
         // Calculate the budget: income - expneses
-        data.budget = data.totals.incomes - data.totals.expenses;
+        data.budget = data.totals.income - data.totals.expense;
         // caluclate percentage of income that we spent
-        data.percentage = Math.round((data.totals.expenses / data.totals.incomes) * 100);
+        data.percentage = Math.round((data.totals.expense / data.totals.income) * 100);
+    },
+
+    getBudget: function(){
+      return {
+        budget: data.budget,
+        totalIncome: data.totals.income,
+        totalExpenses: data.totals.expense,
+        percentage: data.percentage
+      }
     },
 
     testing: function (){
@@ -162,14 +172,14 @@ var globalController = (function(budgetCtrl, UICtrl){
 
   var updateBudget = function(){
     // 1. Calculate the budget.
-
+    budgetCtrl.calculateBudget();
     // 2. Return the budget.
-
+    var budget = budgetCtrl.getBudget();
     // 3. Display the budget on the UI
-
+    console.log(budget);
   }
 
-  var ctrlAddItem = function(){html
+  var ctrlAddItem = function(){
     var input, newItem;
     // 1. get the field input data
     input = UICtrl.getInput();
