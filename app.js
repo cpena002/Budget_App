@@ -16,6 +16,15 @@ var budgetController = (function(){
     this.value = value;
   };
 
+  var calculateTotal = function(type){
+    var sum = 0;
+    data.allItems[type].forEach(function(current){
+      sum = sum + current.value;
+    });
+    data.totals[type] = sum;
+
+  }
+
   var data = {
     allItems: {
       expense: [],
@@ -52,6 +61,16 @@ var budgetController = (function(){
       return newItem;
 
     },
+
+    calculateBudget: function(){
+        // calculate total income and expneses
+
+        // Calculate the budget: income - expneses
+
+        // caluclate percentage of income that we spent
+
+    },
+
     testing: function (){
       console.log(data);
     }
@@ -148,7 +167,7 @@ var globalController = (function(budgetCtrl, UICtrl){
 
   }
 
-  var ctrlAddItem = function(){
+  var ctrlAddItem = function(){html
     var input, newItem;
     // 1. get the field input data
     input = UICtrl.getInput();
