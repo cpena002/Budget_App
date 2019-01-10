@@ -74,7 +74,7 @@ var budgetController = (function(){
         if(data.totals.income > 0){
           data.percentage = Math.round((data.totals.expense / data.totals.income) * 100);
         } else {
-          data.percentage = -1; 
+          data.percentage = -1;
         }
     },
 
@@ -96,17 +96,20 @@ var budgetController = (function(){
 
 // UI CONTROLLER
 var UIController = (function(){
-  // functions included in the object returned by this module are poublic and accessible to other modules.
-
   var DOMStrings = {
     inputType: '.add__type',
     inputDescription: '.add__description',
     inputValue: '.add__value',
     inputButton: '.add__btn',
     incomeContainer: '.income__list',
-    expensesContainer: '.expenses__list'
+    expensesContainer: '.expenses__list',
+    budgetLabel: '.budget__value',
+    incomeLabel: '.budget__income--value',
+    expenseLabe: '.budget__expenses--value',
+    percentageLabel: '.budget__expenses--percentage'
   }
 
+  // functions included in the object returned by this module are poublic and accessible to other modules.
   return {
     getInput: function(){
       //Get the type, description, and value enered by the user.
@@ -152,6 +155,13 @@ var UIController = (function(){
 
     },
 
+    displayBudget: function(obj){
+      document.querySelector(DOMStrings.budgetLabel).textContent = obj.budget;
+      document.querySelector(DOMStrings.incomeLabel).textContent = obj.totalIncome;
+      document.querySelector(DOMStrings.expenseLabe).textContent = obj.totalExpenses;
+      document.querySelector(DOMStrings.percentageLabel).textContent = obj.percentage;
+    },
+
     getDOMStrings: function (){
       return DOMStrings
     }
@@ -180,7 +190,7 @@ var globalController = (function(budgetCtrl, UICtrl){
     // 2. Return the budget.
     var budget = budgetCtrl.getBudget();
     // 3. Display the budget on the UI
-    console.log(budget);
+    UICtrl.displayBudget(budget);
   }
 
   var ctrlAddItem = function(){
