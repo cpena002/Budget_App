@@ -159,7 +159,13 @@ var UIController = (function(){
       document.querySelector(DOMStrings.budgetLabel).textContent = obj.budget;
       document.querySelector(DOMStrings.incomeLabel).textContent = obj.totalIncome;
       document.querySelector(DOMStrings.expenseLabe).textContent = obj.totalExpenses;
-      document.querySelector(DOMStrings.percentageLabel).textContent = obj.percentage;
+
+
+      if(obj.percentage > 0){
+        document.querySelector(DOMStrings.percentageLabel).textContent = obj.percentage + "%";
+      } else {
+        document.querySelector(DOMStrings.percentageLabel).textContent = "---";
+      }
     },
 
     getDOMStrings: function (){
