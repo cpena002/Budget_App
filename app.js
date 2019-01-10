@@ -84,7 +84,7 @@ var budgetController = (function(){
         totalIncome: data.totals.income,
         totalExpenses: data.totals.expense,
         percentage: data.percentage
-      }
+      };
     },
 
     testing: function (){
@@ -220,6 +220,12 @@ var globalController = (function(budgetCtrl, UICtrl){
   return {
     init: function(){
       console.log('started');
+      UICtrl.displayBudget({
+        budget: 0,
+        totalIncome: 0,
+        totalExpenses: 0,
+        percentage: 0
+      });
       setupEventListeners();
     }
   }
