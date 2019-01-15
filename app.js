@@ -106,7 +106,8 @@ var UIController = (function(){
     budgetLabel: '.budget__value',
     incomeLabel: '.budget__income--value',
     expenseLabe: '.budget__expenses--value',
-    percentageLabel: '.budget__expenses--percentage'
+    percentageLabel: '.budget__expenses--percentage',
+    container: '.container'
   }
 
   // functions included in the object returned by this module are poublic and accessible to other modules.
@@ -187,7 +188,7 @@ var globalController = (function(budgetCtrl, UICtrl){
         ctrlAddItem();
       }
     });
-
+    document.querySelector(DOM.container).addEventListener('click', ctrlDeleteItem);
   };
 
   var updateBudget = function(){
@@ -215,6 +216,10 @@ var globalController = (function(budgetCtrl, UICtrl){
       updateBudget();
     }
 
+  };
+
+  var ctrlDeleteItem = function(event){
+    console.log(event.target);
   };
 
   return {
