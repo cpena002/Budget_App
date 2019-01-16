@@ -250,7 +250,7 @@ var globalController = (function(budgetCtrl, UICtrl){
       // 1. delete the item form the data structure.
       budgetCtrl.deleteItem(type, id);
       // 2. delete the item from the UI.
-
+      UICtrl.deleteListItem(itemID);
       // 3. update and who the new budgeto
     }
   };
