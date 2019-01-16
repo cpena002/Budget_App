@@ -64,6 +64,22 @@ var budgetController = (function(){
 
     },
 
+    deleteItem: function(type, id){
+      var ids, index;
+      //Loop over all objects and return an array of the object's ids.
+      ids = data.allItems[type].map(function(current){
+        return current.id;
+      })
+
+      // store the index of the 
+      index = ids.indexOf(id)
+
+      if (index !=== -1){
+        data.allItems[type].splice(index, 1);
+      }
+
+    },
+
     calculateBudget: function(){
         // calculate total income and expneses
         calculateTotal('expense');
@@ -231,7 +247,7 @@ var globalController = (function(budgetCtrl, UICtrl){
 
       // 2. delete the item from the UI.
 
-      // 3. update and who the new budget
+      // 3. update and who the new budgeto
     }
   };
 
