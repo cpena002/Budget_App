@@ -212,6 +212,15 @@ var globalController = (function(budgetCtrl, UICtrl){
     document.querySelector(DOM.container).addEventListener('click', ctrlDeleteItem);
   };
 
+  var updatePercentages: function(){
+
+    // 1. calculate percentages
+
+    // 2. Read percentages from the budgt controller.
+
+    // 3. Update the UI with the new percentages.
+  }
+
   var updateBudget = function(){
     // 1. Calculate the budget.
     budgetCtrl.calculateBudget();
@@ -235,6 +244,8 @@ var globalController = (function(budgetCtrl, UICtrl){
       UICtrl.clearFields();
       // 5. Calculate and update budget.
       updateBudget();
+      // 6. Calculate and update percentages.
+      updatePercentages();
     }
 
   };
@@ -253,6 +264,8 @@ var globalController = (function(budgetCtrl, UICtrl){
       UICtrl.deleteListItem(itemID);
       // 3. update and who the new budget
       updateBudget();
+      // 4. calculate and update percentages.
+      updatePercentages();
     }
   };
 
