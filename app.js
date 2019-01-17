@@ -1,11 +1,23 @@
 // BUDGET CONTROLLER
 var budgetController = (function(){
   //Expense function constructor.
-  var Expense = function(id, description, value){
+  var Expense = function(id, description, value, percentage){
     this.id = id;
     this.description = description;
     this.value = value;
+    this.percentage = -1;
   };
+
+  // Function constructor to calculate the percentage of a given expense calculated agains the total money in the budget.
+  Expense.prototype.calcPercentage = function(totalIncome){
+    if(totalIncome > 0){
+    this.percentage = Math.round((this.value / totalIncome) * 100);
+  } else {
+    this.percentage = -1;
+  }
+  };
+
+
 
   // Income function constructor.
   var Income = function(id, description, value){
@@ -92,6 +104,10 @@ var budgetController = (function(){
         } else {
           data.percentage = -1;
         }
+    },
+
+    calculatePercentages: function(){
+
     },
 
     getBudget: function(){
@@ -207,19 +223,19 @@ var globalController = (function(budgetCtrl, UICtrl){
     document.addEventListener('keypress', function(event){
       if(event.keyCode === 13 || event.which === 13){
         ctrlAddItem();
-      }
+      };
     });
     document.querySelector(DOM.container).addEventListener('click', ctrlDeleteItem);
   };
 
-  var updatePercentages: function(){
+  var updatePercentages = function(){
 
     // 1. calculate percentages
 
     // 2. Read percentages from the budgt controller.
 
     // 3. Update the UI with the new percentages.
-  }
+  };
 
   var updateBudget = function(){
     // 1. Calculate the budget.
@@ -228,7 +244,7 @@ var globalController = (function(budgetCtrl, UICtrl){
     var budget = budgetCtrl.getBudget();
     // 3. Display the budget on the UI
     UICtrl.displayBudget(budget);
-  }
+  };
 
   var ctrlAddItem = function(){
     var input, newItem;
@@ -246,7 +262,7 @@ var globalController = (function(budgetCtrl, UICtrl){
       updateBudget();
       // 6. Calculate and update percentages.
       updatePercentages();
-    }
+    };
 
   };
 
