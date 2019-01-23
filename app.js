@@ -269,7 +269,7 @@ var globalController = (function(budgetCtrl, UICtrl){
     // 2. Read percentages from the budgt controller.
     var percentages = budgetCtrl.getPercentages();
     // 3. Update the UI with the new percentages.
-    console.log(percentages);
+    UICtrl.displayPercentages(percentages);
   };
 
   var updateBudget = function(){
