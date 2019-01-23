@@ -151,7 +151,7 @@ var UIController = (function(){
     expenseLabe: '.budget__expenses--value',
     percentageLabel: '.budget__expenses--percentage',
     container: '.container',
-    expensesPercLabel: 'item__percentage'
+    expensesPercLabel: '.item__percentage'
   }
 
   // functions included in the object returned by this module are poublic and accessible to other modules.
@@ -219,18 +219,20 @@ var UIController = (function(){
     },
 
     displayPercentages: function(percentages){
-      var fields;
-      fields = document.querySelectorAll(DOMStrings.expensesPercLabel);
-
+      console.log(percentages);
+      var fields = document.querySelectorAll(DOMStrings.expensesPercLabel);
+      console.log(fields.length);
       // A forEach function, but for nodeLists.
       var nodeListForEach = function(list, callback){
         for (var i = 0; i < list.length; i++){
+          console.log(i);
           callback(list[i], i);
         };
       };
 
       /* When nodeListForEach is called, we pass a callback function. That function is in turn  assigned to the 'callback' parameter in the function expression nodeListForEach above. In the function expression, we loop over the list and in each iteration we call the callback function. The code defined in the callback function will execute for each element in the list. */
       nodeListForEach(fields, function(current, index){
+        console.log('in');
         // Code that is executed when the callback function is called.
         if(percentages[index] > 0 ){
           current.textContent = percentages[index] + '%';
