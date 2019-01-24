@@ -172,6 +172,13 @@ var UIController = (function(){
     return (type === 'expense' ? '-' : '+') + ' ' + int + '.' + dec;
   };
 
+  // A forEach function, but for nodeLists.
+  var nodeListForEach = function(list, callback){
+    for (var i = 0; i < list.length; i++){
+      callback(list[i], i);
+    };
+  };
+
   // functions included in the object returned by this module are poublic and accessible to other modules.
   return {
     getInput: function(){
@@ -241,12 +248,6 @@ var UIController = (function(){
 
     displayPercentages: function(percentages){
       var fields = document.querySelectorAll(DOMStrings.expensesPercLabel);
-      // A forEach function, but for nodeLists.
-      var nodeListForEach = function(list, callback){
-        for (var i = 0; i < list.length; i++){
-          callback(list[i], i);
-        };
-      };
 
       /* When nodeListForEach is called, we pass a callback function. That function is in turn  assigned to the 'callback' parameter in the function expression nodeListForEach above. In the function expression, we loop over the list and in each iteration we call the callback function. The code defined in the callback function will execute for each element in the list. */
       nodeListForEach(fields, function(current, index){
@@ -269,13 +270,16 @@ var UIController = (function(){
 
     },
 
-    changeType: function(){
+    changedType: function(){
       var fields;
       fields = document.querySelectorAll(
         DOMStrings.inputType + ',' +
-        DOMStrings.inputDescription, ',' +
-        DOMStrings.inputValue
-      );
+        DOMStrings.inputDescription + ',' +
+        DOMStrings.inputValue);
+
+      nodeListForEach(fields, function(cur){
+        cur.classList.toggle('red-focus');
+      })
     },
 
     getDOMStrings: function (){
