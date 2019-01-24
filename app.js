@@ -269,12 +269,19 @@ var UIController = (function(){
 
     },
 
+    changeType: function(){
+      var fields;
+      fields = document.querySelectorAll(
+        DOMStrings.inputType + ',' +
+        DOMStrings.inputDescription, ',' +
+        DOMStrings.inputValue
+      );
+    },
+
     getDOMStrings: function (){
       return DOMStrings
     }
   }
-
-
 
 })();
 
@@ -289,6 +296,8 @@ var globalController = (function(budgetCtrl, UICtrl){
       };
     });
     document.querySelector(DOM.container).addEventListener('click', ctrlDeleteItem);
+
+    document.querySelector(DOM.inputType).addEventListener('change', UICtrl.changedType);
   };
 
   var updatePercentages = function(){
