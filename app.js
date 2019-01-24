@@ -223,9 +223,12 @@ var UIController = (function(){
     },
 
     displayBudget: function(obj){
-      document.querySelector(DOMStrings.budgetLabel).textContent = obj.budget;
-      document.querySelector(DOMStrings.incomeLabel).textContent = obj.totalIncome;
-      document.querySelector(DOMStrings.expenseLabe).textContent = obj.totalExpenses;
+      var type;
+      obj.budget > 0 ? type = 'income' : type = 'expense';
+
+      document.querySelector(DOMStrings.budgetLabel).textContent = formatNumber(obj.budget, type);
+      document.querySelector(DOMStrings.incomeLabel).textContent = formatNumber(obj.totalIncome, 'income');
+      document.querySelector(DOMStrings.expenseLabe).textContent = formatNumber(obj.totalExpenses, 'expense');
 
 
       if(obj.percentage > 0){
