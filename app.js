@@ -280,6 +280,8 @@ var UIController = (function(){
       nodeListForEach(fields, function(cur){
         cur.classList.toggle('red-focus');
       })
+
+      document.querySelector(DOMStrings.inputButton).classList.toggle('red');
     },
 
     getDOMStrings: function (){
