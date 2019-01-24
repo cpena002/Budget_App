@@ -260,12 +260,14 @@ var UIController = (function(){
     },
 
     displayMonth: function(){
-      var now, year, month;
+      var now, year, month, months;
       now = new Date();
-      year = now.getFullYear;
-      document.querySelector(DOMStrings.dateLabel).textContent = year;
+      months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+      month = now.getMonth();
+      year = now.getFullYear();
+      document.querySelector(DOMStrings.dateLabel).textContent = months[month] + ' ' + year;
 
-    }
+    },
 
     getDOMStrings: function (){
       return DOMStrings
@@ -357,6 +359,7 @@ var globalController = (function(budgetCtrl, UICtrl){
         percentage: 0
       });
       setupEventListeners();
+      UICtrl.displayMonth();
     }
   }
 
