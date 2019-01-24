@@ -154,6 +154,23 @@ var UIController = (function(){
     expensesPercLabel: '.item__percentage'
   }
 
+  var formatNumber = function(num, type){
+    var numSplit;
+
+    num = Math.abs(num);
+    num = num.toFixed(2);
+
+    numSplit = num.split('.');
+
+    int = numSplit[0];
+    // Add a comma at the thousands place.
+    if(int.length > 3){
+      int = int.substr(0, int.length - 3) + ',' + int.substr(int.length - 3, 3);
+    };
+    dec = numSplit[1];
+    return (type === 'expense' ? '-' : '+') + ' ' + int + '.' + dec;
+  };
+
   // functions included in the object returned by this module are poublic and accessible to other modules.
   return {
     getInput: function(){
@@ -174,12 +191,12 @@ var UIController = (function(){
         html = '<div class="item clearfix" id="income-%id%"> <div class="item__description">%description%</div> <div class="right clearfix"> <div class="item__value">%value%</div> <div class="item__delete"> <button class="item__delete--btn"><i class="ion-ios-close-outline"></i></button> </div> </div> </div>'
       } else if (type === 'expense') {
         element = DOMStrings.expensesContainer;
-        html = '<div class="item clearfix" id="expense-%id%"> <div class="item__description">%description%</div> <div class="right clearfix"> <div class="item__value">- %value%</div> <div class="item__percentage">21%</div> <div class="item__delete"> <button class="item__delete--btn"><i class="ion-ios-close-outline"></i></button> </div> </div> </div>'
+        html = '<div class="item clearfix" id="expense-%id%"> <div class="item__description">%description%</div> <div class="right clearfix"> <div class="item__value"> %value%</div> <div class="item__percentage">21%</div> <div class="item__delete"> <button class="item__delete--btn"><i class="ion-ios-close-outline"></i></button> </div> </div> </div>'
       }
       // Replace placeholder text with actual data.
       newHtml = html.replace('%id%', obj.id);
       newHtml = newHtml.replace('%description%', obj.description);
-      newHtml = newHtml.replace('%value%', obj.value);
+      newHtml = newHtml.replace('%value%', formatNumber(obj.value, type));
       // Insert HTML into the DOM.
       document.querySelector(element).insertAdjacentHTML('beforeend', newHtml);
 
@@ -219,20 +236,16 @@ var UIController = (function(){
     },
 
     displayPercentages: function(percentages){
-      console.log(percentages);
       var fields = document.querySelectorAll(DOMStrings.expensesPercLabel);
-      console.log(fields.length);
       // A forEach function, but for nodeLists.
       var nodeListForEach = function(list, callback){
         for (var i = 0; i < list.length; i++){
-          console.log(i);
           callback(list[i], i);
         };
       };
 
       /* When nodeListForEach is called, we pass a callback function. That function is in turn  assigned to the 'callback' parameter in the function expression nodeListForEach above. In the function expression, we loop over the list and in each iteration we call the callback function. The code defined in the callback function will execute for each element in the list. */
       nodeListForEach(fields, function(current, index){
-        console.log('in');
         // Code that is executed when the callback function is called.
         if(percentages[index] > 0 ){
           current.textContent = percentages[index] + '%';
@@ -241,24 +254,6 @@ var UIController = (function(){
         }
       });
     },
-
-    formatNumber: function(num, type){
-      var numSplit;
-
-      num = Math.abs(num);
-      num = num.toFixed(2);
-
-      numSplit = num.split('.');
-
-      int = numSplit[0];
-      // Add
-      if(int.length > 3){
-        int = int.substr(0, int.length - 3) + ',' + int.substr(int.length - 3, 3);
-      };
-
-      dec = numSplit[1];
-      return type === 'exp' ? '-' : '+' + ' ' + int + dec;
-    }
 
     getDOMStrings: function (){
       return DOMStrings
