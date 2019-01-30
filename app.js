@@ -293,7 +293,7 @@ var UIController = (function(){
 
 // GLOBAL APP CONTROLLER
 var globalController = (function(budgetCtrl, UICtrl){
-  var setupEventListeners = function(){ 
+  var setupEventListeners = function(){
     var DOM = UICtrl.getDOMStrings();
     document.querySelector(DOM.inputButton).addEventListener('click', ctrlAddItem);
     document.addEventListener('keypress', function(event){
